@@ -32,39 +32,88 @@ let user;
     console.log(`you choose ${user}`);  
 }
 
-function PlayRound (NumberOfRound)
+
+
+function playRound()
 
 {
-for ( let i = 0 ; i < NumberOfRound ; i++)
-{
 
-    RandomChoice();
-UserChoice();
+ RandomChoice();
+// UserChoice();
 if (result === "rock")
 {
-    if (user === "rock") {console.log("Duh! There is a tie")}
-    else  if (user === "paper") { console.log("YOU WON!!!!") ; HumanScore++;}
-    else  if (user === "scissor") {console.log("YOU LOSE :(");ComputerScore++;}
+    if (user === "rock") { (roundresult.textContent = "tie"); compchoice.textContent = `Computer choice : ${result}`;}
+    else  if (user === "paper") { roundresult.textContent = "YOU WON GURL";compchoice.textContent = `Computer choice : ${result}`; HumanScore++;}
+    else  if (user === "scissor") { roundresult.textContent = "lost,NOT SLAY :(";compchoice.textContent = `Computer choice : ${result}`; ComputerScore++;}
 }
 
 if (result === "paper")
 {
-    if (user === "paper") {console.log("Duh! There is a tie")}
-    else if (user === "scissor") { console.log("YOU WON!!!!"); HumanScore++;}
-    else if (user === "rock") {console.log("YOU LOSE :(") ; ComputerScore++;}
+    if (user === "paper") {(roundresult.textContent = "tie");compchoice.textContent = `Computer choice : ${result}`;}
+    else if (user === "scissor") { roundresult.textContent = "YOU WON GURL";compchoice.textContent = `Computer choice : ${result}`; HumanScore++;}
+    else if (user === "rock") { roundresult.textContent = "lost,NOT SLAY :(" ;compchoice.textContent = `Computer choice : ${result}`; ComputerScore++;}
 }
 
 
 if (result === "scissor")
 {
-    if (user === "scissor") {console.log("Duh! There is a tie")}
-    else  if (user === "rock") { console.log("YOU WON!!!!"); HumanScore++;}
-    else  if (user === "paper") {console.log("YOU LOSE :(") ; ComputerScore++;}
+    if (user === "scissor") {(roundresult.textContent = "tie");compchoice.textContent = `Computer choice : ${result}`;}
+    else  if (user === "rock") { roundresult.textContent = "YOU WON GURL";compchoice.textContent = `Computer choice : ${result}`; HumanScore++;}
+    else  if (user === "paper") { roundresult.textContent = "lost,NOT SLAY :(" ;compchoice.textContent = `Computer choice : ${result}`; ComputerScore++;}
 }
 
-}
-console.log (`Final scores are : Computer : ${ComputerScore} Human : ${HumanScore}`)
 
+updateScore();
+showResult( HumanScore,ComputerScore)
 }
 
-PlayRound(5);
+const btnRock = document.querySelector(".rock");
+btnRock.addEventListener("click", () => {
+    user = "rock";playRound();
+})
+
+const btnPaper = document.querySelector(".paper");
+btnPaper.addEventListener("click", () => {
+    user = "paper";playRound();
+})
+
+const btnScissor = document.querySelector(".scissor");
+btnScissor.addEventListener("click", () => {
+    user = "scissor";playRound();
+}
+)
+const currentscore = document.querySelector(".currentscore");
+const compchoice = document.querySelector(".comp");
+
+const results = document.querySelector(".results");
+const computerPara = document.createTextNode("COMPUTER won!!!");
+const humanPara = document.createTextNode("HUMAN won!!!");
+
+
+const roundresult = document.querySelector(".roundresult");
+
+function updateScore() {
+    currentscore.textContent = `Current points: Computer: ${ComputerScore} Human: ${HumanScore}`;
+}
+function showResult( HumanScore,ComputerScore)
+{
+   
+    
+    if ( HumanScore == 5)
+       { results.appendChild(humanPara);
+        btnPaper.disabled = true;
+        btnRock.disabled = true;
+        btnScissor.disabled = true;
+        return 0; 
+        
+       }
+
+     else if ( ComputerScore == 5)
+         {results.appendChild(computerPara);
+            btnPaper.disabled = true;
+        btnRock.disabled = true;
+        btnScissor.disabled = true;
+        return 0;}
+
+        
+}
